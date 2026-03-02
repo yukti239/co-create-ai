@@ -46,6 +46,15 @@ server/
 - Basic project structure created
 - Initial repository setup on GitHub
 
+## Current Progress (Day 2)
+
+- Workflow schema created
+- Steps structure implemented
+- POST /api/workflows route added
+- GET /api/workflows route added
+- API tested using Postman
+- MongoDB integration verified
+
 ---
 
 ## Team Contribution Plan

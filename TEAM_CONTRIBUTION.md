@@ -38,3 +38,32 @@ This document tracks the responsibilities and progress of each team member.
 - MongoDB connected
 
 (Updates will be added weekly as development progresses.)
+
+
+---
+
+## 📅 Day 1 Contribution
+
+### 👩‍💻 Yukti – Backend Setup
+
+- Initialized Node.js project
+- Installed and configured Express
+- Connected MongoDB using Mongoose
+- Created project structure (models, routes)
+- Created GitHub repository
+- Added README and .gitignore
+- Ensured server runs successfully
+
+---
+
+## 📅 Day 2 Contribution
+
+### 👩‍💻 Yukti – Workflow Feature Development
+
+- Designed Workflow schema using Mongoose
+- Implemented steps array with status tracking
+- Created POST /api/workflows route
+- Created GET /api/workflows route
+- Integrated workflow routes in index.js
+- Tested API endpoints using Postman
+- Verified data storage in MongoDB
