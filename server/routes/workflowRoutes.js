@@ -1,49 +1,34 @@
-require("dotenv").config();
 const express = require("express");
 const router = express.Router();
-const OpenAI = require("openai");
 const Workflow = require("../models/Workflow");
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
-
-// CREATE WORKFLOW
+// ✅ Create a new workflow
 router.post("/", async (req, res) => {
   try {
-    const { prompt } = req.body;
+    const { title, description, steps } = req.body;
 
-    // Call OpenAI
-    const response = await openai.chat.completions.create({
-      model: "gpt-4o-mini",
-      messages: [
-        { role: "system", content: "You are a workflow automation assistant." },
-        { role: "user", content: prompt }
-      ],
-    });
-
-    const aiReply = response.choices[0].message.content;
-
-    // Save to MongoDB
     const newWorkflow = new Workflow({
-      prompt,
-      response: aiReply
+      title,
+      description,
+      steps,
     });
 
     await newWorkflow.save();
 
-    res.json({ success: true, data: newWorkflow });
-
+    res.status(201).json(newWorkflow);
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ error: "Something went wrong" });
+    res.status(500).json({ message: "Error creating workflow" });
   }
 });
 
-// GET ALL WORKFLOWS
+// ✅ Get all workflows
 router.get("/", async (req, res) => {
-  const workflows = await Workflow.find();
-  res.json(workflows);
+  try {
+    const workflows = await Workflow.find();
+    res.status(200).json(workflows);
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching workflows" });
+  }
 });
 
 module.exports = router;
