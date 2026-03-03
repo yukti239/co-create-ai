@@ -1,29 +1,33 @@
-require("dotenv").config();
+require("dotenv").config();   // Load environment variables
 
-console.log("MONGO URI:", process.env.MONGO_URI);
 const express = require("express");
-const cors = require("cors");
 const mongoose = require("mongoose");
 
-
 const workflowRoutes = require("./routes/workflowRoutes");
+const authRoutes = require("./routes/authRoutes");
 
 const app = express();
 
-app.use(cors());
+// Middleware
 app.use(express.json());
 
-// MongoDB connection
+// MongoDB Connection
 mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log("MongoDB connected"))
-  .catch(err => console.log("MongoDB error:", err));
+  .then(() => console.log("MongoDB Connected"))
+  .catch((err) => console.log("MongoDB error:", err));
 
+// Routes
+app.use("/api/workflows", workflowRoutes);
+app.use("/api/auth", authRoutes);
+
+// Test Route (Optional)
 app.get("/", (req, res) => {
-  res.send("Server running...");
+  res.send("Server is running successfully 🚀");
 });
 
-app.use("/api/workflows", workflowRoutes);
+// Start Server
+const PORT = process.env.PORT || 5000;
 
-app.listen(5000, () => {
-  console.log("Server started on port 5000");
+app.listen(PORT, () => {
+  console.log(`Server started on port ${PORT}`);
 });
