@@ -55,7 +55,15 @@ server/
 - API tested using Postman
 - MongoDB integration verified
 
----
+## Current Progress (Day 3)
+
+- Created User schema using Mongoose.
+- Implemented authentication routes.
+- Added POST /api/auth/register endpoint.
+- Added POST /api/auth/login endpoint.
+- Integrated password hashing using bcrypt.
+- Implemented JWT token generation for secure login.
+- Successfully tested authentication using Postman.
 
 ## Team Contribution Plan
 

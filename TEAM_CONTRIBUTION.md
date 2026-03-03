@@ -67,3 +67,15 @@ This document tracks the responsibilities and progress of each team member.
 - Integrated workflow routes in index.js
 - Tested API endpoints using Postman
 - Verified data storage in MongoDB
+
+---
+
+## 📅 Day 3 Contribution
+
+### 👨‍💻 Mansi Singh– Authentication Module
+
+- Designed and implemented User model.
+- Created register and login API routes.
+- Integrated bcrypt for password hashing.
+- Implemented JWT-based authentication.
+- Tested authentication endpoints.
