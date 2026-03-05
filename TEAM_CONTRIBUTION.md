@@ -79,3 +79,14 @@ This document tracks the responsibilities and progress of each team member.
 - Integrated bcrypt for password hashing.
 - Implemented JWT-based authentication.
 - Tested authentication endpoints.
+
+---
+
+## Day 4 Contribution
+
+### Mansi Singh – Security Implementation
+
+- Implemented JWT middleware.
+- Added token verification for protected routes.
+- Secured workflow creation API.
+- Tested authentication and protected routes.

@@ -65,6 +65,13 @@ server/
 - Implemented JWT token generation for secure login.
 - Successfully tested authentication using Postman.
 
+## Current Progress (Day 4)
+
+- Implemented JWT authentication middleware.
+- Protected workflow creation route using token verification.
+- Only authenticated users can create workflows.
+- Tested secured endpoints using Postman.
+
 ## Team Contribution Plan
 
 - Member 1: Backend & AI Integration
