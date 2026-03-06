@@ -72,6 +72,18 @@ server/
 - Only authenticated users can create workflows.
 - Tested secured endpoints using Postman.
 
+## Current Progress (Day 5)
+
+- Initialized React frontend using Create React App
+- Created frontend folder inside project repository
+- Installed required dependencies (axios, react-router-dom)
+- Created basic page structure for frontend
+- Implemented Login, Register, and Dashboard pages
+- Configured routing using React Router
+- Verified frontend runs successfully on localhost
+
+
+
 ## Team Contribution Plan
 
 - Member 1: Backend & AI Integration
@@ -91,12 +103,3 @@ server/
 
 
 
-Current Progress (Day 5)
-
-• Initialized React frontend using Create React App
-• Created frontend folder inside project repository
-• Installed required dependencies (axios, react-router-dom)
-• Created basic page structure for frontend
-• Implemented Login, Register, and Dashboard pages
-• Configured routing using React Router
-• Verified frontend runs successfully on localhost
