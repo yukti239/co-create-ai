@@ -90,3 +90,15 @@ This document tracks the responsibilities and progress of each team member.
 - Added token verification for protected routes.
 - Secured workflow creation API.
 - Tested authentication and protected routes.
+
+
+## Day 5 Contribution
+## 👩‍💻 Shreya Sharma– Frontend Development
+
+• Initialized React application for frontend
+• Created frontend project structure
+• Developed Login page UI
+• Developed Register page UI
+• Developed Dashboard page UI
+• Configured React Router for page navigation
+• Verified frontend application runs on http://localhost:3000
