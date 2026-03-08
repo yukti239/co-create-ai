@@ -83,6 +83,20 @@ server/
 - Verified frontend runs successfully on localhost
 
 
+## Current Progress (Day 6)
+
+- Implemented workflow creation functionality in the dashboard.
+- Added automatic workflow step generation (AI-ready structure).
+- Developed workflow cards to display workflow details dynamically.
+- Implemented step-based progress tracking using checkboxes.
+- Added progress bar to visualize workflow completion percentage.
+- Integrated analytics charts (Pie Chart and Bar Chart) using Recharts.
+-Connected dashboard frontend with backend workflow APIs.
+- Improved dashboard UI with responsive cards and analytics layout.
+- Verified workflow creation, progress tracking, and charts working correctly.
+
+
+
 
 ## Team Contribution Plan
 
