@@ -91,6 +91,7 @@ This document tracks the responsibilities and progress of each team member.
 - Secured workflow creation API.
 - Tested authentication and protected routes.
 
+---
 
 ## Day 5 Contribution
 
@@ -103,3 +104,19 @@ This document tracks the responsibilities and progress of each team member.
 - Developed Dashboard page UI
 - Configured React Router for page navigation
 - Verified frontend application runs on http://localhost:3000
+
+---
+
+## Day 6 Contribution
+
+👩‍💻 Yukti Pandey – Dashboard & Workflow Features
+
+- Implemented workflow creation feature in dashboard.
+- Added automatic workflow step generation structure.
+- Developed workflow cards to display workflow information.
+- Implemented step-based progress tracking using checkboxes.
+- Added progress bar for workflow completion percentage.
+- Integrated analytics charts (Pie Chart and Bar Chart) using Recharts.
+- Connected dashboard frontend with backend workflow APIs.
+- Improved dashboard UI layout and responsiveness.
+- Tested workflow creation and progress tracking functionality.
