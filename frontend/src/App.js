@@ -1,21 +1,23 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-
-import Login from "./pages/login";
-import Register from "./pages/register";
+import React from "react";
+import {BrowserRouter as Router,Routes,Route} from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
 
-function App() {
-  return (
-    <BrowserRouter>
-      <Routes>
+function App(){
 
-        <Route path="/" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+return(
 
-      </Routes>
-    </BrowserRouter>
-  );
+<Router>
+
+<Routes>
+
+<Route path="/" element={<Dashboard/>}/>
+
+</Routes>
+
+</Router>
+
+)
+
 }
 
 export default App;
