@@ -1,28 +1,50 @@
-import React, { useState } from "react";
+import React from "react";
+import API from "../services/api";
 
-function WorkflowCard({ workflow }) {
+function WorkflowCard({ workflow, reload }) {
 
-const [steps,setSteps] = useState(workflow.steps);
+const toggleStep = async (index) => {
 
-const toggleStep = (index) => {
+try {
 
-const updated = [...steps];
+const updatedSteps = workflow.steps.map((step, i) => {
+if(i === index){
+return {
+...step,
+status: step.status === "completed" ? "pending" : "completed"
+};
+}
+return step;
+});
 
-updated[index].status =
-updated[index].status === "completed"
-? "pending"
-: "completed";
+await API.put(`/workflows/${workflow._id}`, {
+steps: updatedSteps
+});
 
-setSteps(updated);
+reload();
+
+} catch (err) {
+console.log(err);
+alert("Update failed");
+}
 
 };
 
-const completed = steps.filter(
-step => step.status === "completed"
+const handleDelete = async()=>{
+try{
+await API.delete(`/workflows/${workflow._id}`);
+reload();
+}catch{
+alert("Delete failed");
+}
+};
+
+const completedSteps = workflow.steps.filter(
+s=>s.status==="completed"
 ).length;
 
 const progress = Math.round(
-(completed / steps.length) * 100
+(completedSteps / workflow.steps.length) * 100
 );
 
 return(
@@ -30,41 +52,33 @@ return(
 <div className="card">
 
 <h3>{workflow.title}</h3>
-
 <p>{workflow.description}</p>
 
-{steps.map((step,index)=>(
-<div key={index}>
+<h4>Steps</h4>
+
+{workflow.steps.map((step,index)=>(
+<div key={index} style={{marginBottom:"5px"}}>
 
 <input
 type="checkbox"
 checked={step.status==="completed"}
 onChange={()=>toggleStep(index)}
+style={{marginRight:"10px"}}
 />
 
-<span style={{marginLeft:"10px"}}>
 {step.action}
-</span>
 
 </div>
 ))}
 
-<p style={{marginTop:"10px"}}>
+<p><b>Progress:</b> {progress}%</p>
 
-Progress: {progress}%
-
-</p>
-
-<div className="progressBar">
-
-<div
-className="progressFill"
-style={{width:`${progress}%`}}
+<button 
+onClick={handleDelete}
+style={{background:"red", marginTop:"10px"}}
 >
-
-</div>
-
-</div>
+Delete
+</button>
 
 </div>
 

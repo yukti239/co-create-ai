@@ -1,40 +1,30 @@
 import React from "react";
-import { PieChart, Pie, Cell, Tooltip } from "recharts";
+import { BarChart, Bar, XAxis, YAxis, Tooltip } from "recharts";
 
-function ProgressChart({completed,total}){
+function ProgressChart({completed,remaining}){
 
 const data = [
-{ name:"Completed", value: completed },
-{ name:"Remaining", value: total-completed }
-]
-
-const COLORS = ["#fbbf24","#374151"]
+{ name:"Completed", value:completed },
+{ name:"Remaining", value:remaining }
+];
 
 return(
 
-<PieChart width={250} height={250}>
+<div className="card">
 
-<Pie
-data={data}
-dataKey="value"
-cx="50%"
-cy="50%"
-outerRadius={80}
-label
->
+<h3>Workflow Progress</h3>
 
-{data.map((entry,index)=>(
-<Cell key={index} fill={COLORS[index]}/>
-))}
-
-</Pie>
-
+<BarChart width={350} height={250} data={data}>
+<XAxis dataKey="name"/>
+<YAxis/>
 <Tooltip/>
+<Bar dataKey="value"/>
+</BarChart>
 
-</PieChart>
+</div>
 
-)
+);
 
 }
 
-export default ProgressChart
+export default ProgressChart;

@@ -1,26 +1,21 @@
 const mongoose = require("mongoose");
 
-const WorkflowSchema = new mongoose.Schema({
-  title: {
-    type: String,
-    required: true,
-  },
+const workflowSchema = new mongoose.Schema(
+{
+  title: String,
   description: String,
+
   steps: [
     {
-      stepNumber: Number,
       action: String,
-      assignedTo: String,
       status: {
         type: String,
-        default: "pending",
-      },
-    },
-  ],
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
-});
+        default: "pending"
+      }
+    }
+  ]
+},
+{ timestamps: true }
+);
 
-module.exports = mongoose.model("Workflow", WorkflowSchema);
+module.exports = mongoose.model("Workflow", workflowSchema);

@@ -1,58 +1,24 @@
 import React from "react";
-import { PieChart,Pie,Cell,Tooltip,BarChart,Bar,XAxis,YAxis,CartesianGrid } from "recharts";
+import { PieChart, Pie, Tooltip, Legend } from "recharts";
 
 function WorkflowChart({completed,total}){
 
-const pieData = [
+const data = [
 { name:"Completed", value:completed },
-{ name:"Remaining", value:total-completed }
+{ name:"Pending", value: total - completed }
 ];
-
-const barData = [
-{ name:"Completed", value:completed },
-{ name:"Remaining", value:total-completed }
-];
-
-const COLORS = ["#fbbf24","#374151"];
 
 return(
 
-<div style={{display:"flex",gap:"40px"}}>
+<div className="card">
 
-<PieChart width={250} height={250}>
+<h3>Completion Overview</h3>
 
-<Pie
-data={pieData}
-dataKey="value"
-cx="50%"
-cy="50%"
-outerRadius={80}
-label
->
-
-{pieData.map((entry,index)=>(
-<Cell key={index} fill={COLORS[index]} />
-))}
-
-</Pie>
-
+<PieChart width={300} height={250}>
+<Pie data={data} dataKey="value" outerRadius={90}/>
 <Tooltip/>
-
+<Legend/>
 </PieChart>
-
-<BarChart width={300} height={250} data={barData}>
-
-<CartesianGrid strokeDasharray="3 3" />
-
-<XAxis dataKey="name"/>
-
-<YAxis/>
-
-<Tooltip/>
-
-<Bar dataKey="value" fill="#fbbf24"/>
-
-</BarChart>
 
 </div>
 

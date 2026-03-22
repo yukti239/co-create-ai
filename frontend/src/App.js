@@ -1,23 +1,18 @@
-import React from "react";
-import {BrowserRouter as Router,Routes,Route} from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
+import Workflows from "./pages/Workflows";
 
 function App(){
-
 return(
-
-<Router>
+<BrowserRouter>
 
 <Routes>
-
 <Route path="/" element={<Dashboard/>}/>
-
+<Route path="/workflows" element={<Workflows/>}/>
 </Routes>
 
-</Router>
-
-)
-
+</BrowserRouter>
+);
 }
 
 export default App;

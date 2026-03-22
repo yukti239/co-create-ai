@@ -1,28 +1,28 @@
 import React from "react";
-import { FaHome, FaProjectDiagram, FaUser } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 function Sidebar(){
+
 return(
 
 <div className="sidebar">
 
-<h2>CoCreate AI</h2>
+<h2 className="logo">CoCreate AI</h2>
 
-<div className="menu-item">
-<FaHome/> Dashboard
-</div>
+<nav>
 
-<div className="menu-item">
-<FaProjectDiagram/> Workflows
-</div>
+<Link to="/">Dashboard</Link>
 
-<div className="menu-item">
-<FaUser/> Profile
-</div>
+<Link to="/workflows">Workflows</Link>
+
+<Link to="/profile">Profile</Link>
+
+</nav>
 
 </div>
 
-)
+);
+
 }
 
 export default Sidebar;

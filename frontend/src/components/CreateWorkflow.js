@@ -1,94 +1,58 @@
 import React, { useState } from "react";
 import API from "../services/api";
 
-function CreateWorkflow({ refreshWorkflows }) {
+function CreateWorkflow({ reload }) {
 
-const [title,setTitle] = useState("");
-const [description,setDescription] = useState("");
+  const [input, setInput] = useState("");
 
-const handleSubmit = async (e) => {
+  const handleSubmit = async () => {
 
-e.preventDefault();
+    const steps = [
 
-// Default steps (later AI will replace these)
+      { stepNumber:1, action:"Requirement Analysis", status:"pending" },
+      { stepNumber:2, action:"Data Collection", status:"pending" },
+      { stepNumber:3, action:"Data Cleaning", status:"pending" },
+      { stepNumber:4, action:"Model Development", status:"pending" },
+      { stepNumber:5, action:"Backend API Development", status:"pending" },
+      { stepNumber:6, action:"Frontend Integration", status:"pending" },
+      { stepNumber:7, action:"Testing", status:"pending" },
+      { stepNumber:8, action:"Deployment", status:"pending" }
 
-const steps = [
-{
-stepNumber:1,
-action:"Planning",
-assignedTo:"User",
-status:"pending"
-},
-{
-stepNumber:2,
-action:"Development",
-assignedTo:"User",
-status:"pending"
-},
-{
-stepNumber:3,
-action:"Testing",
-assignedTo:"User",
-status:"pending"
-},
-{
-stepNumber:4,
-action:"Deployment",
-assignedTo:"User",
-status:"pending"
-}
-];
+    ];
 
-try{
+    await API.post("/workflows", {
 
-await API.post("/workflows",{
-title,
-description,
-steps
-});
+      title: input,
+      description: "AI Generated Workflow",
+      steps
 
-setTitle("");
-setDescription("");
+    });
 
-refreshWorkflows();
+    reload();
 
-}catch(err){
-console.log(err);
-}
+    setInput("");
 
-};
+  };
 
-return(
+  return (
 
-<div className="card">
+    <div className="card">
 
-<h3>Create Workflow</h3>
+      <h3>Create AI Workflow</h3>
 
-<form onSubmit={handleSubmit}>
+      <input
+        placeholder="Example: Build AI Chatbot"
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+      />
 
-<input
-placeholder="Workflow Title"
-value={title}
-onChange={(e)=>setTitle(e.target.value)}
-required
-/>
+      <button onClick={handleSubmit}>
+        Generate Workflow
+      </button>
 
-<input
-placeholder="Description"
-value={description}
-onChange={(e)=>setDescription(e.target.value)}
-required
-/>
+    </div>
 
-<button type="submit">
-Create Workflow
-</button>
-
-</form>
-
-</div>
-
-);
+  );
 
 }
 

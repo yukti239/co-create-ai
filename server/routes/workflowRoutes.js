@@ -2,32 +2,71 @@ const express = require("express");
 const router = express.Router();
 const Workflow = require("../models/Workflow");
 
-// ✅ Create a new workflow
+
+// ✅ CREATE
 router.post("/", async (req, res) => {
   try {
-    const { title, description, steps } = req.body;
 
-    const newWorkflow = new Workflow({
-      title,
-      description,
-      steps,
-    });
+    const workflow = new Workflow(req.body);
+    await workflow.save();
 
-    await newWorkflow.save();
+    res.json(workflow);
 
-    res.status(201).json(newWorkflow);
-  } catch (error) {
-    res.status(500).json({ message: "Error creating workflow" });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: err.message });
   }
 });
 
-// ✅ Get all workflows
+
+// ✅ GET ALL
 router.get("/", async (req, res) => {
   try {
-    const workflows = await Workflow.find();
-    res.status(200).json(workflows);
-  } catch (error) {
-    res.status(500).json({ message: "Error fetching workflows" });
+
+    const workflows = await Workflow.find().sort({ createdAt: -1 });
+    res.json(workflows);
+
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+
+// ✅ UPDATE (checkbox)
+router.put("/:id", async (req, res) => {
+  try {
+
+    const updated = await Workflow.findByIdAndUpdate(
+      req.params.id,
+      { steps: req.body.steps },
+      { new: true }
+    );
+
+    res.json(updated);
+
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+
+// ✅ DELETE
+router.delete("/:id", async (req, res) => {
+  try {
+
+    const deleted = await Workflow.findByIdAndDelete(req.params.id);
+
+    if (!deleted) {
+      return res.status(404).json({ error: "Workflow not found" });
+    }
+
+    res.json({ message: "Deleted successfully" });
+
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: err.message });
   }
 });
 
