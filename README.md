@@ -5,6 +5,12 @@ The system will allow users to generate, manage, and store workflows dynamically
 
 The main idea is to combine backend development with AI integration to create structured workflows automatically.
 
+Live Demo
+🔗 Frontend (Vercel): https://co-create-ai-ochre.vercel.app
+⚙️ Backend (Render): https://co-create-ai.onrender.com
+
+👉 This project is fully deployed and accessible online (not localhost).
+
 ---
 
 ## Project Objective
@@ -97,12 +103,26 @@ server/
 
 
 
+## Current Progress (Deployment & Integration)
+
+-Successfully deployed backend on Render.
+-Configured MongoDB Atlas cloud database for production.
+-Fixed database connection issues (replaced localhost with Atlas URI).
+-Enabled CORS for frontend-backend communication.
+-Successfully deployed frontend on Vercel.
+-Connected frontend with backend using environment variables.
+-Verified full CRUD operations working on deployed application.
+-Tested workflow creation, update, and deletion on live system.
+-Ensured real-time progress tracking works after deployment.
+-Fixed API integration and deployment-related bugs.
+-Confirmed application runs on live URL (not localhost).
 
 ## Team Contribution Plan
 
 - Member 1: Backend & AI Integration
 - Member 2: Authentication & Security
 - Member 3: Documentation, CI/CD & Frontend
+
 
 ---
 

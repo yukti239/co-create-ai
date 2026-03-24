@@ -120,3 +120,14 @@ This document tracks the responsibilities and progress of each team member.
 - Connected dashboard frontend with backend workflow APIs.
 - Improved dashboard UI layout and responsiveness.
 - Tested workflow creation and progress tracking functionality.
+
+
+## Day 7 Contribution
+
+👩‍💻 Yukti Pandey – Deployment & Integration
+
+-Configured MongoDB Atlas and updated database connection.
+-Deployed backend on Render and set environment variables.
+-Enabled CORS and verified backend APIs working.
+-Deployed frontend on Vercel and connected it with backend.
+-Tested application on live URL to ensure proper integration.
