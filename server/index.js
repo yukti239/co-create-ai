@@ -10,12 +10,17 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-mongoose.connect(process.env.MONGO_URI)
-.then(()=>console.log("MongoDB Connected"))
-.catch(err=>console.log(err));
-
+// ROUTES
 app.use("/api/workflows", workflowRoutes);
 
-app.listen(5000,()=>{
-console.log("Server running on port 5000");
-});
+// CONNECT DB + START SERVER
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => {
+    console.log("MongoDB Connected");
+
+    app.listen(5000, () => {
+      console.log("Server running on port 5000");
+    });
+
+  })
+  .catch(err => console.log(err));
