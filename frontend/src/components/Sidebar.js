@@ -1,28 +1,48 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
-function Sidebar(){
+function Sidebar({ onLogout }) {
+  return (
+    <div className="sidebar">
 
-return(
+      <h2 className="logo">CoCreate AI</h2>
 
-<div className="sidebar">
+      <nav>
 
-<h2 className="logo">CoCreate AI</h2>
+        <NavLink 
+          to="/" 
+          className={({ isActive }) => isActive ? "active" : ""}
+        >
+          Dashboard
+        </NavLink>
 
-<nav>
+        <NavLink 
+          to="/workflows" 
+          className={({ isActive }) => isActive ? "active" : ""}
+        >
+          Workflows
+        </NavLink>
 
-<Link to="/">Dashboard</Link>
+        <NavLink 
+          to="/profile" 
+          className={({ isActive }) => isActive ? "active" : ""}
+        >
+          Profile
+        </NavLink>
 
-<Link to="/workflows">Workflows</Link>
+      </nav>
 
-<Link to="/profile">Profile</Link>
+      {/* 🔥 Logout Button */}
+      <button
+        onClick={onLogout}
+        className="logout-btn"
+        style={{ marginTop: "30px", width: "100%" }}
+      >
+        Logout
+      </button>
 
-</nav>
-
-</div>
-
-);
-
+    </div>
+  );
 }
 
 export default Sidebar;

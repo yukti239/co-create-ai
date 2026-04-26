@@ -7,118 +7,147 @@ import WorkflowChart from "../components/WorkflowChart";
 import ProgressChart from "../components/ProgressChart";
 import "../styles/dashboard.css";
 
-function Dashboard(){
+function Dashboard({ setUser }) {
+  const [workflows, setWorkflows] = useState([]);
+  const [search, setSearch] = useState("");
+  const [filtered, setFiltered] = useState([]);
 
-const [workflows,setWorkflows] = useState([]);
+  // 🔄 LOAD DATA
+  const loadWorkflows = async () => {
+    try {
+      const res = await API.get("/workflows");
+      const data = res.data.reverse();
 
-const loadWorkflows = async()=>{
-try{
-const res = await API.get("/workflows");
+      setWorkflows(data);
+      setFiltered(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
-// latest first
-setWorkflows(res.data.reverse());
+  useEffect(() => {
+    loadWorkflows();
+  }, []);
 
-}catch(err){
-console.log(err);
-}
-};
+  // 🔥 LOGOUT (ONLY USED IN SIDEBAR)
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    setUser(null);
+  };
 
-useEffect(()=>{
-loadWorkflows();
-},[]);
+  // 🔍 SEARCH (button)
+  const handleSearch = () => {
+    const result = workflows.filter((w) =>
+      w.title.toLowerCase().includes(search.toLowerCase())
+    );
+    setFiltered(result);
+  };
 
+  // 🔍 AUTO SEARCH (on typing)
+  useEffect(() => {
+    const result = workflows.filter((w) =>
+      w.title.toLowerCase().includes(search.toLowerCase())
+    );
+    setFiltered(result);
+  }, [search, workflows]);
 
-// ✅ REAL STATS
-let totalSteps = 0;
-let completedSteps = 0;
+  // 📊 STATS
+  let totalSteps = 0;
+  let completedSteps = 0;
 
-workflows.forEach(w=>{
-totalSteps += w.steps.length;
+  workflows.forEach((w) => {
+    totalSteps += w.steps.length;
+    completedSteps += w.steps.filter(
+      (s) => s.status === "completed"
+    ).length;
+  });
 
-completedSteps += w.steps.filter(
-s=>s.status==="completed"
-).length;
-});
+  const totalWorkflows = workflows.length;
 
-const totalWorkflows = workflows.length;
-const completedWorkflows = workflows.filter(
-w=>w.steps.every(s=>s.status==="completed")
-).length;
+  const completedWorkflows = workflows.filter(
+    (w) => w.steps.every((s) => s.status === "completed")
+  ).length;
 
-const pendingWorkflows = totalWorkflows - completedWorkflows;
+  const pendingWorkflows = totalWorkflows - completedWorkflows;
 
-// latest workflow
-const latest = workflows.length > 0 ? workflows[0] : null;
+  return (
+    <div className="layout">
+      {/* Sidebar */}
+      <Sidebar onLogout={handleLogout} />
 
-return(
+      <div className="main">
+        {/* 🔥 TOP BAR */}
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <h1>Dashboard</h1>
 
-<div className="layout">
+          <div style={{ display: "flex", gap: "10px" }}>
+            {/* SEARCH INPUT */}
+            <input
+              type="text"
+              placeholder="Search workflow..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
 
-<Sidebar/>
+            {/* SEARCH BUTTON */}
+            <button onClick={handleSearch} className="search-btn">
+              Search
+            </button>
+          </div>
+        </div>
 
-<div className="main">
+        {/* 📊 STATS */}
+        <div className="stats">
+          <div className="card stat">
+            <h3>Total Workflows</h3>
+            <p>{totalWorkflows}</p>
+          </div>
 
-<h1>Dashboard</h1>
+          <div className="card stat">
+            <h3>Completed Workflows</h3>
+            <p>{completedWorkflows}</p>
+          </div>
 
-{/* ✅ STATS BACK */}
-<div className="stats">
+          <div className="card stat">
+            <h3>Pending Workflows</h3>
+            <p>{pendingWorkflows}</p>
+          </div>
+        </div>
 
-<div className="card stat">
-<h3>Total Workflows</h3>
-<p>{totalWorkflows}</p>
-</div>
+        {/* 📊 CHARTS */}
+        <h2>Workflow Analytics</h2>
 
-<div className="card stat">
-<h3>Completed Workflows</h3>
-<p>{completedWorkflows}</p>
-</div>
+        <div className="charts">
+          <WorkflowChart completed={completedSteps} total={totalSteps} />
 
-<div className="card stat">
-<h3>Pending Workflows</h3>
-<p>{pendingWorkflows}</p>
-</div>
+          <ProgressChart
+            completed={completedSteps}
+            remaining={totalSteps - completedSteps}
+          />
+        </div>
 
-</div>
+        {/* ➕ CREATE */}
+        <CreateWorkflow reload={loadWorkflows} />
 
-{/* ✅ GRAPHS */}
-<h2>Workflow Analytics</h2>
+        {/* 📦 WORKFLOWS */}
+        <h2>Workflows</h2>
 
-<div className="charts">
-
-<WorkflowChart 
-completed={completedSteps} 
-total={totalSteps}
-/>
-
-<ProgressChart 
-completed={completedSteps} 
-remaining={totalSteps - completedSteps}
-/>
-
-</div>
-
-{/* CREATE */}
-<CreateWorkflow reload={loadWorkflows}/>
-
-{/* ONLY LATEST */}
-<h2>Latest Workflow</h2>
-
-<div className="workflow-grid">
-
-{latest ? (
-<WorkflowCard workflow={latest} reload={loadWorkflows}/>
-) : (
-<p>No workflow</p>
-)}
-
-</div>
-
-</div>
-
-</div>
-
-);
-
+        <div className="workflow-grid">
+          {filtered.length > 0 ? (
+            filtered.map((w) => (
+              <WorkflowCard
+                key={w._id}
+                workflow={w}
+                reload={loadWorkflows}
+              />
+            ))
+          ) : (
+            <p>No workflows found</p>
+          )}
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default Dashboard;

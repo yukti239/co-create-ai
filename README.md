@@ -117,6 +117,25 @@ server/
 -Fixed API integration and deployment-related bugs.
 -Confirmed application runs on live URL (not localhost).
 
+
+## Current Progress (UI, Profile & Authentication Updates)
+
+-Improved Profile page UI layout and alignment.
+-Added profile image upload with preview functionality.
+-Enabled profile image persistence using localStorage.
+-Implemented click-to-upload profile image feature.
+-Added Productivity Score, Weekly Activity, and Achievements sections.
+-Fixed login persistence using localStorage.
+-Ensured user session remains after page refresh.
+-Improved authentication flow and validation.
+-Added workflow search functionality on dashboard.
+-Implemented workflow filtering (All / Completed / Pending).
+-Fixed profile image reset issue after logout/login.
+-Fixed repeated login requirement issue.
+-Optimized UI consistency and user experience.
+-Verified all features working smoothly after updates.
+
+
 ## Team Contribution Plan
 
 - Member 1: Backend & AI Integration

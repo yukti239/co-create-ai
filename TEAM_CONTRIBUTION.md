@@ -131,3 +131,18 @@ This document tracks the responsibilities and progress of each team member.
 -Enabled CORS and verified backend APIs working.
 -Deployed frontend on Vercel and connected it with backend.
 -Tested application on live URL to ensure proper integration.
+
+
+
+
+👩‍💻 Shreya Sharma – UI, Profile & Authentication 
+
+-Improved Profile page UI and overall layout alignment.
+-Implemented profile image upload with preview and persistence.
+-Added Productivity Score, Weekly Activity, and Achievements sections.
+-Fixed login persistence using localStorage.
+-Ensured user session remains after page refresh.
+-Added search and filter functionality on dashboard.
+-Fixed profile image reset and repeated login issues.
+-Optimized UI consistency and user experience.
+-Tested all features to ensure smooth functionality.
