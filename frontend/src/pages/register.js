@@ -10,14 +10,17 @@ const Register = ({ setUser }) => {
     e.preventDefault();
 
     const users = JSON.parse(localStorage.getItem("users")) || [];
-    const exists = users.find((u) => u.email === email);
+    const normalizedEmail = email.trim().toLowerCase();
+    const normalizedPassword = password.trim();
+
+    const exists = users.find((u) => u.email === normalizedEmail);
 
     if (exists) {
       alert("User already exists");
       return;
     }
 
-    const newUser = { email, password };
+    const newUser = { email: normalizedEmail, password: normalizedPassword };
     users.push(newUser);
     localStorage.setItem("users", JSON.stringify(users));
     localStorage.setItem("user", JSON.stringify(newUser));

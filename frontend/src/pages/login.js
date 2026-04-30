@@ -12,10 +12,12 @@ const Login = ({ setUser }) => {
 
     // ✅ GET USERS
     const users = JSON.parse(localStorage.getItem("users")) || [];
+    const normalizedEmail = email.trim().toLowerCase();
+    const normalizedPassword = password.trim();
 
     // ✅ FIND USER
     const foundUser = users.find(
-      (u) => u.email === email && u.password === password
+      (u) => u.email === normalizedEmail && u.password === normalizedPassword
     );
 
     if (foundUser) {
