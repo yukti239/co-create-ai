@@ -6,8 +6,7 @@ The system will allow users to generate, manage, and store workflows dynamically
 The main idea is to combine backend development with AI integration to create structured workflows automatically.
 
 Live Demo
-🔗 Frontend (Vercel): https://co-create-ai-ochre.vercel.app
-⚙️ Backend (Render): https://co-create-ai.onrender.com
+🔗 Deployed Link : https://co-create-ai-frontend.vercel.app/
 
 👉 This project is fully deployed and accessible online (not localhost).
 
