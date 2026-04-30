@@ -1,5 +1,14 @@
 {
+  "private": true,
+  "workspaces": [
+    "frontend"
+  ],
   "dependencies": {
-    "react-router-dom": "^7.14.2"
+    "ajv": "^8.20.0"
+  },
+  "scripts": {
+    "build": "npm --workspace=frontend run build",
+    "start": "npm --workspace=frontend start",
+    "test": "npm --workspace=frontend test"
   }
 }
