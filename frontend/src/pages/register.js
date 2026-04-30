@@ -1,16 +1,15 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const Register = ({ setPage }) => {
+const Register = ({ setUser }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleRegister = (e) => {
     e.preventDefault();
 
-    // ✅ get all users
     const users = JSON.parse(localStorage.getItem("users")) || [];
-
-    // ✅ check if already exists
     const exists = users.find((u) => u.email === email);
 
     if (exists) {
@@ -18,20 +17,17 @@ const Register = ({ setPage }) => {
       return;
     }
 
-    // ✅ add new user
     const newUser = { email, password };
     users.push(newUser);
-
-    // ✅ save updated users list
     localStorage.setItem("users", JSON.stringify(users));
-
-    // ✅ also store current logged user (optional but useful)
     localStorage.setItem("user", JSON.stringify(newUser));
 
-    alert("Registered successfully");
+    if (setUser) {
+      setUser(newUser);
+    }
 
-    // go to login page
-    setPage("login");
+    alert("Registered successfully");
+    navigate("/");
   };
 
   return (
@@ -74,7 +70,7 @@ const Register = ({ setPage }) => {
 
           <p style={styles.footer}>
             Already have an account?{" "}
-            <span onClick={() => setPage("login")} style={styles.link}>
+            <span onClick={() => navigate("/login")} style={styles.link}>
               Login
             </span>
           </p>

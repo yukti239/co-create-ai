@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 
-import Login from "./pages/Login";
-import Register from "./pages/Register";
+import Login from "./pages/login";
+import Register from "./pages/register";
 import Dashboard from "./pages/Dashboard";
 import Workflows from "./pages/Workflows";
 import Profile from "./pages/Profile";
@@ -18,17 +18,24 @@ function App() {
     }
   }, []);
 
-  // 🔐 If not logged in
-  if (!user) {
-    return <Login setUser={setUser} />;
-  }
-
   return (
     <Routes>
-      <Route path="/" element={<Dashboard setUser={setUser} />} />
-      <Route path="/workflows" element={<Workflows setUser={setUser} />} />
-      <Route path="/profile" element={<Profile setUser={setUser} />} />
-      <Route path="*" element={<Navigate to="/" />} />
+      {!user ? (
+        <>
+          <Route path="/login" element={<Login setUser={setUser} />} />
+          <Route path="/register" element={<Register setUser={setUser} />} />
+          <Route path="*" element={<Navigate to="/login" />} />
+        </>
+      ) : (
+        <>
+          <Route path="/" element={<Dashboard setUser={setUser} />} />
+          <Route path="/workflows" element={<Workflows setUser={setUser} />} />
+          <Route path="/profile" element={<Profile setUser={setUser} />} />
+          <Route path="/login" element={<Navigate to="/" />} />
+          <Route path="/register" element={<Navigate to="/" />} />
+          <Route path="*" element={<Navigate to="/" />} />
+        </>
+      )}
     </Routes>
   );
 }
